@@ -4,7 +4,9 @@ let canvas = document.createElement("canvas");
 canvas.setAttribute("width", "512");
 canvas.setAttribute("height", "512");
 canvas.style.border = "1px dashed black";
-document.body.appendChild(canvas);
+let codingArea = document.getElementById('draw')
+codingArea.appendChild(canvas);
+
 let ctx = canvas.getContext("2d");
 class Tile{
   constructor(x,y,cnt,source){
@@ -30,9 +32,9 @@ let fps = 1,
  start = 0,
  frameDuration = 1000 / fps;
 let catImage = new Image();
-catImage.src = "static/images/cat.png"
+catImage.src = "/static/images/cat.png"
 
-let ob1 = new Tile(32,32,1,"static/images/cat.png");
+let ob1 = new Tile(32,32,1,"/static/images/cat.png");
 
 let bg = new Image();
 bg.src = ob1.data.imgsrc;
