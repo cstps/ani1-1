@@ -4,14 +4,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- code mirror -->
+  <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.39.0/codemirror.min.js'></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.39.0/mode/xml/xml.min.js"></script>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.39.0/codemirror.min.css'>
   <title>Document</title>
 </head> 
 <body>
-  <header> menu </header>
+  <header> 
+   <img src="/static/images/playbutton.png" id="playbutton" alt="실행"""">
+   <img src="/static/images/stop.png" id="stop" alt="멈춤">
+   <img src="/static/images/repeat.png" id="repeat" alt="처음부터">
+   
+  </header>
   <nav> 
-    <textarea>
-      coding
-    </textarea>
+    <textarea id ='editor'></textarea>
 
   </nav>
   <section id='draw'>  </section>
