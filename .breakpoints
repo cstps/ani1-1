@@ -2,22 +2,24 @@
   "files": {
     "ani/static/js/main.js": [
       {
-        "id": "0b44e174-9222-4f96-b1cc-aaf94cbfc674",
-        "line": 43,
-        "version": 3596,
-        "index": 879
-      },
-      {
         "id": "4e338eb2-ca9e-4fae-9de0-8389caf1a999",
-        "line": 44,
-        "version": 3596,
-        "index": 912
+        "line": 120,
+        "version": 5581,
+        "index": 2636
       },
       {
         "id": "a1813320-8835-4eb1-8e42-26daba161f98",
-        "line": 45,
-        "version": 3596,
-        "index": 970
+        "line": 120,
+        "version": 5581,
+        "index": 2636
+      }
+    ],
+    "ani/templates/ani/index.html": [
+      {
+        "id": "795ecba6-45f4-4c9e-97ef-2fb4a7284efc",
+        "line": 21,
+        "version": 810,
+        "index": 526
       }
     ]
   }

@@ -4,11 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- code mirror -->
-  <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.39.0/codemirror.min.js'></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.39.0/mode/xml/xml.min.js"></script>
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.39.0/codemirror.min.css'>
+  <script src="/static/lib/ace.js"></script>  
+  <script src="/static/lib/theme-monokai.js"></script> 
+  <link rel="stylesheet" href="/static/css/main.css">
+
   <title>Document</title>
+
 </head> 
 <body>
   <header> 
@@ -17,12 +18,14 @@
    <img src="/static/images/repeat.png" id="repeat" alt="처음부터">
    
   </header>
-  <nav> 
-    <textarea id ='editor'></textarea>
+  
+  <div class="editor" id ="editor">aaa</div>
 
-  </nav>
-  <section id='draw'>  </section>
-
+  <div class ="canvas">
+   <canvas id="canvas"></canvas>
+  </div>
+ 
   <script src="/static/js/main.js"></script>
+  
 </body>
 </html>
