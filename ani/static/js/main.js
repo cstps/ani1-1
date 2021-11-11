@@ -46,9 +46,11 @@ class Robot{
     this.x = x;
     this.y = x;
     this.direction = direction;
+    this.pdirection = direction;
     this.imageSrc = imageSrc;
     this.width = 64;
     this.height = 64;
+    
   }
   init(ctx){
     ctx.clearRect(this.prex,this.prey,this.width, this.height);
@@ -57,6 +59,7 @@ class Robot{
     this.y = this.starty;
     this.prex = this.x;
     this.prey = this.y;
+    this.direction = this.pdirection;    
   }
   draw(ctx){    
     ctx.clearRect(this.prex,this.prey,this.width, this.height);
@@ -78,8 +81,8 @@ class Robot{
     else if(this.direction == 3) // 남쪽
       this.y+=this.width;
   }
-  tr(){ // 왼쪽 돌기
-    this.direction = (this.direction+1)% 4;
+  turnLeft(){ // 왼쪽 돌기
+    this.direction = (this.direction+1)%4;
   }
 }
 // 실행속도 제어
@@ -115,22 +118,26 @@ for(let i=0; i<3; i+=1){
 var editor = ace.edit("editor");
 editor.setTheme("ace/theme/monokai");
 editor.session.setMode("ace/mode/javascript");
-editor.setFontSize(20);
+editor.setFontSize(15);
+
+let userCommand = [];
+let userCode=[];
 
 // 코드를 다시 실행했을 경우 기존 로봇과 물건만 원래 상태로 변경하기.
 let worldReInit = function(){ 
   // 화면 초기화
   ctx.clearRect(0,0,canvas.width, canvas.height);
   ctx.beginPath();
-  //로봇 초기 위치 설정
-  robot.init(ctx);
-  robot.draw(ctx);
 
-  // 타일 보이기
+  // 타일 초기화
   for(let i=0; i<3; i+=1){
     tile[i].tileDraw(ctx);
     console.log(tile[i].data.imageSrc);
   }
+
+  //로봇 초기 위치 설정
+  robot.init(ctx);
+  robot.draw(ctx);
   
 }
 
@@ -138,19 +145,20 @@ let worldReInit = function(){
 //Start the game loop
 function gameLoop(timestamp) {
  requestAniNum = requestAnimationFrame(gameLoop);
- 
  // 애니메이션 시간 설정
  if (timestamp >= start) {
-
-  // 로봇 그리기
-  robot.draw(ctx);
-  robot.move();
-
-     // 타일 그리기
+  // 타일 그리기 
   for(let i=0;i<3;i+=1)
     tile[i].tileDraw(ctx);
 
-  
+  // 로봇 그리기
+  if(userCode.length > 0){
+    let tmp = userCode.shift()
+    if(tmp == "move()") robot.move();
+    else if(tmp == "turn-left()") robot.turnLeft();
+  }
+  robot.draw(ctx);
+
   //Reset the frame start time
   start = timestamp + frameDuration;
  }
@@ -158,13 +166,21 @@ function gameLoop(timestamp) {
 
 let playbutton = document.getElementById('playbutton')
 let stopbutton = document.getElementById('stop')
-let repeatbutton = document.getElementById('repeat')
+
 
 playbutton.addEventListener('mousedown', robotPlay,false);
 stopbutton.addEventListener('mousedown', robotStop,false);
-repeatbutton.addEventListener('mousedown', robotRepeat,false);
+
 
 function robotPlay(e){  
+  cancelAnimationFrame(requestAniNum);
+  userCommand=[];
+  userCode = [];
+  worldReInit(ctx);
+  userCommand = editor.getValue().split("\n");
+  for(let i=0;i<userCommand.length;i++){
+    if(userCommand[i]!="") userCode.push(userCommand[i]);
+  }
   gameLoop();
 }
 
@@ -172,10 +188,6 @@ function robotStop(e){
   cancelAnimationFrame(requestAniNum);
 }
 
-function robotRepeat(e){  
-  cancelAnimationFrame(requestAniNum);
-  worldReInit(ctx);
-  gameLoop();
-}
+
 
 
